@@ -1,8 +1,8 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
-from habits.models import Habit
+from habits.models import Habit, Location
 from habits.paginators import HabitsPaginator
-from habits.serializers import HabitSerializer
+from habits.serializers import HabitSerializer, LocationSerializer
 
 
 class HabitListAPIView(ListAPIView):
@@ -47,3 +47,8 @@ class HabitUpdateAPIView(UpdateAPIView):
 class HabitDeleteAPIView(DestroyAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+
+
+class LocationCreateAPIView(CreateAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer

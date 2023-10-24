@@ -1,7 +1,7 @@
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer, IntegerField, DurationField
 
-from habits.models import Habit
+from habits.models import Habit, Location
 from habits.validators import DurationValidator, PeriodicityValidator, BoundHabitValidator
 
 
@@ -29,3 +29,10 @@ class HabitSerializer(ModelSerializer):
             raise ValidationError('A pleasant habit cannot have a reward or a bound habit')
 
         return attrs
+
+
+class LocationSerializer(ModelSerializer):
+
+    class Meta:
+        fields = "__all__"
+        model = Location
