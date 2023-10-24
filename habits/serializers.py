@@ -1,23 +1,19 @@
 from rest_framework.exceptions import ValidationError
-from rest_framework.serializers import ModelSerializer, IntegerField, DurationField
+from rest_framework.serializers import ModelSerializer, IntegerField, DurationField, PrimaryKeyRelatedField
 
 from habits.models import Habit, Location
 from habits.validators import DurationValidator, PeriodicityValidator, BoundHabitValidator
 
 
 class HabitSerializer(ModelSerializer):
-    bound_habit = IntegerField(validators=[BoundHabitValidator()], required=False)
+    bound_habit = PrimaryKeyRelatedField(validators=[BoundHabitValidator()], required=False,
+                                         queryset=Habit.objects.all())
     periodicity = DurationField(validators=[PeriodicityValidator()], required=False)
     duration = IntegerField(validators=[DurationValidator()])
 
     class Meta:
         fields = "__all__"
         model = Habit
-
-    def create(self, validated_data):
-        bound_habit = validated_data.get("bound_habit")
-        if bound_habit:
-            return Habit.objects.get(pk=bound_habit)
 
     def validate(self, attrs):
         if attrs.get("bound_habit", False) and attrs.get("reward", False):

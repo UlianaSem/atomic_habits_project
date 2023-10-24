@@ -22,7 +22,6 @@ class PeriodicityValidator:
 class BoundHabitValidator:
 
     def __call__(self, value):
-        habit = Habit.objects.get(pk=value)
 
-        if not habit.is_pleasant:
+        if not value.is_pleasant:
             raise ValidationError("Habit should have the hallmark of a pleasant habit")
