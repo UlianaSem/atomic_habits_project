@@ -19,9 +19,9 @@ class Location(models.Model):
 
 
 class Habit(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="пользователь", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="пользователь", on_delete=models.CASCADE, **NULLABLE)
 
-    location = models.ForeignKey(Location, on_delete=models.SET_DEFAULT, verbose_name="место", default="любое место")
+    location = models.ForeignKey(Location, on_delete=models.SET_DEFAULT, verbose_name="место", default=1)
     bound_habit = models.ForeignKey("Habit", on_delete=models.SET_NULL, verbose_name="связанная привычка", **NULLABLE)
 
     periodicity = models.DurationField(verbose_name="Периодичность", default=timedelta(days=1))
