@@ -21,6 +21,7 @@ psycopg2 = "^2.9.9"
 python-dotenv = "^1.0.0"
 django-filter = "^23.3"
 coverage = "^7.3.2"
+requests = "^2.31.0"
 
 
 [build-system]

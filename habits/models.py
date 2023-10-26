@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import date
 
 from django.conf import settings
 from django.db import models
@@ -19,12 +19,14 @@ class Location(models.Model):
 
 
 class Habit(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="пользователь", on_delete=models.CASCADE, **NULLABLE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="пользователь", on_delete=models.CASCADE,
+                             **NULLABLE)
 
     location = models.ForeignKey(Location, on_delete=models.SET_DEFAULT, verbose_name="место", default=1)
-    bound_habit = models.ForeignKey("Habit", on_delete=models.SET_NULL, verbose_name="связанная привычка", **NULLABLE)
+    bound_habit = models.ForeignKey("Habit", on_delete=models.SET_NULL, verbose_name="связанная привычка",
+                                    **NULLABLE)
 
-    periodicity = models.DurationField(verbose_name="Периодичность", default=timedelta(days=1))
+    periodicity = models.PositiveIntegerField(verbose_name="Периодичность в днях", default=1)
     time = models.TimeField(verbose_name="время")
     action = models.CharField(max_length=300, verbose_name="действие")
     duration = models.PositiveIntegerField(verbose_name="Время на выполнение")
@@ -32,6 +34,8 @@ class Habit(models.Model):
 
     is_pleasant = models.BooleanField(verbose_name="приятная привычка")
     is_public = models.BooleanField(default=False, verbose_name="видна всем")
+
+    day = models.DateField(verbose_name="день выполнения", default=date.today)
 
     def __str__(self):
         return f"я буду {self.action} в {self.time} в {self.location}"

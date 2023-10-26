@@ -1,8 +1,6 @@
-from datetime import timedelta
+from datetime import date
 
 from rest_framework.exceptions import ValidationError
-
-from habits.models import Habit
 
 
 class DurationValidator:
@@ -15,8 +13,8 @@ class DurationValidator:
 class PeriodicityValidator:
 
     def __call__(self, value):
-        if value > timedelta(days=7):
-            raise ValidationError("Periodicity should be less 7 days")
+        if value > 7:
+            raise ValidationError("Periodicity should be not more 7 days")
 
 
 class BoundHabitValidator:
@@ -25,3 +23,10 @@ class BoundHabitValidator:
 
         if not value.is_pleasant:
             raise ValidationError("Habit should have the hallmark of a pleasant habit")
+
+
+class DayValidator:
+
+    def __call__(self, value):
+        if value < date.today():
+            raise ValidationError("A day can't be past")
