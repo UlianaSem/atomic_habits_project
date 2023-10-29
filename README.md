@@ -22,6 +22,13 @@
 Зависимости, необходимые для работы проекта, указаны в файле pyproject.toml.
 Чтобы установить зависимости, используйте команду `poetry install`
 
+## Документация
+
+Документация находится по ссылкам:
+1. Для загрузки schema.yaml `api/schema/`
+2. Swagger `api/schema/swagger-ui`
+3. Redoc `api/schema/redoc/`
+
 ## Как запустить проект
 
 Для запуска проекта необходимо выполнить следующие шаги:
@@ -34,6 +41,13 @@
 7. Заполните местоположение по умолчанию командой `python manage.py fill_location`
 8. Запустите Celery worker командой `celery -A config worker --loglevel=info`
 9. Как отдельный процесс запустите Celery beat командой `celery -A config beat --loglevel=info`
+
+## Файл .env.example
+
+1. `DATABASES_NAME, DATABASES_USER, DATABASES_PASSWORD, DATABASES_HOST` - данные для подключения к БД
+2. `EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_HOST, EMAIL_PORT, EMAIL_USE_SSL` - данные для осуществления Email рассылки
+3. `TELEGRAM_BOT_TOKEN` - токен Telegram бота
+4. `SECRET_KEY, DEBUG`
 
 ## Авторы
 
