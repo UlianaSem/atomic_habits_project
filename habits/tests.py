@@ -24,7 +24,7 @@ class LocationTestCase(APITestCase):
 
         self.assertEquals(response.json(),
                           {
-                              "id": 7,
+                              "id": Location.objects.last().pk,
                               "location": "test"
                           }
                           )
@@ -129,7 +129,7 @@ class HabitTestCase(APITestCase):
 
         self.assertEquals(response.json(),
                           {
-                              "id": 3,
+                              "id": Habit.objects.last().pk,
                               "bound_habit": None,
                               "periodicity": 3,
                               "duration": 20,
@@ -139,8 +139,8 @@ class HabitTestCase(APITestCase):
                               "reward": "test",
                               "is_pleasant": False,
                               "is_public": True,
-                              "user": 1,
-                              "location": 1
+                              "user": self.user.pk,
+                              "location": self.location.pk
                           }
                           )
 
@@ -164,8 +164,8 @@ class HabitTestCase(APITestCase):
                               "reward": "test reward 1",
                               "is_pleasant": False,
                               "is_public": True,
-                              "user": 6,
-                              "location": 6
+                              "user": self.user.pk,
+                              "location": self.location.pk
                           }
                           )
 
